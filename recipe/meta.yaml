@@ -13,7 +13,7 @@ source:
 
 build:
   noarch: python
-  number: 1
+  number: 2
   script: python -m pip install --no-deps --ignore-installed .
 
 requirements:
@@ -21,7 +21,7 @@ requirements:
     - python
     - pip
     - ads
-    - astropy
+    - astropy-base
     - beautifulsoup4
     - bokeh
     - future
@@ -34,7 +34,7 @@ requirements:
   run:
     - python
     - ads
-    - astropy
+    - astropy-base
     - beautifulsoup4
     - bokeh
     - future
