@@ -7,21 +7,20 @@ package:
   version: {{ version }}
 
 source:
-  fn: {{ name }}-{{ version }}.tar.gz
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: {{ sha256 }}
 
 build:
   noarch: python
-  number: 1
-  script: python -m pip install --no-deps --ignore-installed .
+  number: 2
+  script: python -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
-  build:
-    - python
+  host:
+    - python {{ python_min }}
     - pip
     - ads
-    - astropy
+    - astropy-base
     - beautifulsoup4
     - bokeh
     - future
@@ -30,11 +29,12 @@ requirements:
     - palettable
     - psutil
     - seaborn
+    - setuptools
     - tqdm
   run:
-    - python
+    - python >={{ python_min }}
     - ads
-    - astropy
+    - astropy-base
     - beautifulsoup4
     - bokeh
     - future
@@ -46,6 +46,8 @@ requirements:
     - tqdm
 
 test:
+  requires:
+    - python {{ python_min }}
   imports:
     - astrocats
 
