@@ -1,18 +1,18 @@
 {% set name = "astrocats" %}
-{% set version = "0.3.37" %}
-{% set sha256 = "fb0dbb16e7d30d4eed7e2e48f36785efe670d129c71560e90856e3c50a9c0ee6" %}
+{% set version = "0.5.0" %}
+{% set sha256 = "19584117e841c79f682218978325ddba5cce482bccbc85d2dbf377a72fae5a01" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  url: https://files.pythonhosted.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: {{ sha256 }}
 
 build:
   noarch: python
-  number: 2
+  number: 0
   script: python -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
