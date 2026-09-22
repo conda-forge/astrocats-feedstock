@@ -11,7 +11,7 @@ source:
 
 build:
   noarch: python
-  number: 0
+  number: 1
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   entry_points:
     - astrocats = astrocats.main:main
@@ -26,6 +26,10 @@ requirements:
     - astropy-base >=7.1
     - beautifulsoup4 >=4.13
     - bokeh >=3.7
+    # GitPython refuses to import when there is no git executable on
+    # PATH, and `astrocats.catalog` imports it, so the binary is a
+    # runtime requirement and not just a build-time one.
+    - git
     - gitpython >=3.1.45
     - inflect >=7.5
     - matplotlib-base >=3.10
@@ -42,6 +46,9 @@ test:
     - pip
   imports:
     - astrocats
+    # Reaches `astrocats.catalog.gitter`, and so GitPython. A bare
+    # `import astrocats` does not.
+    - astrocats.catalog.catalog
   commands:
     - pip check
 
